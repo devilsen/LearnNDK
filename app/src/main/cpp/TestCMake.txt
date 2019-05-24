@@ -1,0 +1,104 @@
+
+cmake_minimum_required(VERSION 3.4.1)
+
+
+#set(变量名 变量值)
+set(var 123)
+#message() 打印
+message("var123 = ${var}")
+
+message("\r")
+
+set(list_var 1 2 3)
+set(list_var1 "1;2;3")
+message("list_var = ${list_var}")
+
+message("\r")
+
+set(if_tap OFF)
+set(elseif_tap ON)
+if (${if_tap})
+    message("if")
+elseif (${elseif_tap})
+    message("elseif")
+else (${if_tap})
+    message("else")
+endif (${if_tap})
+
+message("\r")
+
+set(a "")
+while (NOT a STREQUAL xxx)
+    set(a ${a}x)
+    #如果没有引号，无法保留格式，比如空格
+    message("a = ${a}")
+endwhile ()
+
+message("\r")
+
+foreach (item 1 2 3)
+    message("item = ${item}")
+    #item 可以省略
+endforeach (item)
+
+message("\r")
+
+foreach (item RANGE 3)
+    message("item = ${item}")
+endforeach (item)
+
+message("\r")
+
+foreach (item RANGE 1 5 2)
+    message("item = ${item}")
+endforeach (item)
+
+message("\r")
+
+set(list_var2 1 2 3)
+foreach (item IN LISTS list_var2)
+    message("item = ${item}")
+endforeach (item)
+
+message("\r")
+
+#定义函数
+function(func a b c)
+    message("a = ${a}")
+    message("b = ${b}")
+    message("c = ${c}")
+    # 参数个数
+    message("ARGC = ${ARGC}")
+    # 参数列表
+    message("ARGV = ${ARGV}")
+    message("ARGV0 = ${ARGV0}")
+endfunction(func)
+#调用
+func(4 5 6)
+
+message("\r")
+
+macro(ma x y)
+    message("x = ${x}")
+    message("y = ${y}")
+endmacro()
+ma(hello world)
+
+add_library(
+        native-lib
+        SHARED
+        native-lib.cpp)
+
+find_library(
+        log-lib
+        log)
+
+target_link_libraries(
+        native-lib
+        ${log-lib})
+
+# 查找当前目录所有源文件，并将源文件名称列表保存到 DIR_SRCS变量中
+# 不能查找子目录
+aux_source_directory(. DIR_SRCS)
+message(${DIR_SRCS})
+

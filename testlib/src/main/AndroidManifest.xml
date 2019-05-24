@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.sam.testlib" >
+
+    <application>
+        <activity android:name=".TestNativeActivity" />
+    </application>
+</manifest>
